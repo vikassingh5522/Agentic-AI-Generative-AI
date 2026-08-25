@@ -1,0 +1,505 @@
+================================================================================
+OpenLayer Workflow 21.docx
+================================================================================
+OpenLayer Workflow 21
+Cheque Book Request & Issuance
+Enterprise Workflow Blueprint Version 2.0
+Workflow Objective
+Provide an end-to-end digital workflow for cheque book requests from multiple banking channels with secure authentication, automated validations, AI-assisted fraud detection, configurable approvals, secure printing, dispatch, customer communication, and immutable auditability.
+End-to-End Workflow
+Customer Request      │      ▼P01 Receive Service Request      │      ▼P02 Customer Authentication      │      ▼P03 Customer & Account Validation      │      ▼P04 Cheque Book Eligibility Assessment      │      ▼P05 Service Charge & Fee Validation      │      ▼P06 Fraud & Risk Assessment      │      ▼P07 Exception Approval (If Required)      │      ▼P08 Cheque Book Order Creation      │      ▼P09 Secure Cheque Printing      │      ▼P10 Packaging & Dispatch      │      ▼P11 Customer Notification & Delivery Tracking      │      ▼P12 Delivery Confirmation & Workflow Closure
+P01 – Receive Service Request
+Objective
+Capture a cheque book request from any customer interaction channel.
+Activities
+Accept request
+Identify customer
+Select account
+Select cheque book size (25/50/100 leaves)
+Confirm delivery mode
+Validate mandatory information
+Create workflow instance
+Human Roles
+Customer
+Relationship Manager
+Branch Customer Service Officer
+Contact Centre Agent
+Systems
+Mobile Banking
+Internet Banking
+Branch Teller System
+CRM
+OpenLayer Portal
+AI Agent
+Customer Service Agent
+Functions
+Conversational assistance
+Product recommendation
+Auto-form filling
+Duplicate request detection
+Channel guidance
+Integrations
+API Gateway
+CRM
+Workflow Engine
+Customer Master
+Output
+Service Request Created
+P02 – Customer Authentication
+Activities
+Login verification
+OTP validation
+MFA
+Biometric verification
+Device validation
+Session creation
+Human Roles
+Customer
+Branch Officer (exception)
+Systems
+IAM
+MFA Server
+Identity Platform
+AI Agent
+Identity Verification Agent
+Functions
+Adaptive authentication
+Risk-based authentication
+Device fingerprint analysis
+Session anomaly detection
+Integrations
+IAM ↔ OTP Gateway ↔ Workflow Engine
+Output
+Authenticated Customer Session
+P03 – Customer & Account Validation
+Activities
+Verify account ownership
+Check account status
+Validate KYC
+Verify signature
+Check account freeze
+Verify dormant status
+Confirm mailing address
+Human Roles
+Operations Executive
+Branch Officer
+Systems
+Core Banking System
+CIF
+CRM
+Customer Master
+AI Agent
+Account Validation Agent
+Functions
+Customer profile analysis
+Data consistency check
+Exception prediction
+Address validation
+Integrations
+CBS ↔ CIF ↔ CRM ↔ OpenLayer
+Output
+Validated Customer Account
+P04 – Cheque Book Eligibility Assessment
+Activities
+Product eligibility
+Remaining free cheque leaves
+Existing pending requests
+Product restrictions
+Service availability
+Human Roles
+Operations Executive
+Product Manager (policy exception)
+Systems
+Product Engine
+CBS
+Business Rules Engine
+AI Agent
+Eligibility Assessment Agent
+Functions
+Rule evaluation
+Eligibility recommendation
+Product advisory
+Integrations
+Rules Engine ↔ CBS ↔ Product Catalog
+Output
+Eligible / Not Eligible
+P05 – Service Charge & Fee Validation
+Activities
+Calculate applicable charges
+Apply fee waivers
+Verify account balance
+Reserve service charges
+Apply customer segment benefits
+Human Roles
+Operations Executive
+Branch Manager (fee override)
+Systems
+Fee Engine
+CBS
+Product Engine
+AI Agent
+Pricing & Fee Agent
+Functions
+Fee calculation
+Waiver recommendations
+Segment analysis
+Integrations
+CBS ↔ Fee Engine ↔ Product Engine
+Output
+Fee Confirmation
+P06 – Fraud & Risk Assessment
+Activities
+Behaviour analysis
+Velocity checks
+Device risk assessment
+Geolocation verification
+Blacklist screening
+Internal fraud rule validation
+Human Roles
+Fraud Analyst
+Risk Officer
+Systems
+Fraud Management Platform
+Risk Engine
+Device Intelligence
+AI Agent
+Fraud Detection Agent
+Functions
+Fraud scoring
+Behaviour analytics
+Pattern recognition
+Risk explanation
+Integrations
+Fraud Platform ↔ Risk Engine ↔ Workflow Engine
+Output
+Risk Score
+P07 – Exception Approval
+Activities
+Review exception
+Review fraud score
+Verify customer profile
+Approve
+Reject
+Escalate
+Digital signature
+Human Roles
+Branch Manager
+Operations Manager
+Regional Manager
+Systems
+Workflow Engine
+Digital Signature Platform
+AI Agent
+Approval Copilot
+Functions
+Case summary
+Risk explanation
+Approval recommendation
+Policy reference
+Integrations
+Workflow Engine ↔ IAM ↔ Notification ↔ Audit
+Output
+Approval Decision
+P08 – Cheque Book Order Creation
+Activities
+Generate order
+Allocate cheque series
+Generate barcode
+Generate print instructions
+Reserve inventory
+Human Roles
+Back Office Operations Executive
+Systems
+Cheque Management System
+Inventory System
+CBS
+AI Agent
+Order Processing Agent
+Functions
+Order validation
+Inventory optimization
+Duplicate prevention
+Integrations
+CBS ↔ Cheque Management ↔ Inventory
+Output
+Cheque Book Order
+P09 – Secure Cheque Printing
+Activities
+Print cheque book
+MICR encoding
+Quality inspection
+Barcode validation
+Packaging
+Human Roles
+Print Operator
+QA Officer
+Print Supervisor
+Systems
+Secure Print Management System
+Print Quality System
+AI Agent
+Print Quality Agent
+Functions
+Print verification
+MICR validation
+Image quality analysis
+Batch reconciliation
+Integrations
+Print System ↔ Inventory ↔ DMS
+Output
+Printed Cheque Book
+P10 – Packaging & Dispatch
+Activities
+Secure packaging
+Courier allocation
+Shipping label generation
+Dispatch confirmation
+Tracking ID creation
+Human Roles
+Dispatch Executive
+Courier Coordinator
+Systems
+Logistics Management
+Courier Platform
+AI Agent
+Dispatch Optimization Agent
+Functions
+Courier selection
+Route optimization
+Delivery prediction
+Integrations
+Courier APIs ↔ Logistics ↔ Notification Gateway
+Output
+Dispatched Shipment
+P11 – Customer Notification & Delivery Tracking
+Activities
+Send SMS
+Send Email
+WhatsApp notification
+Push notification
+Delivery tracking
+Reminder notifications
+Human Roles
+Customer Service Executive
+Systems
+Notification Gateway
+CRM
+Courier Tracking
+AI Agent
+Notification Agent
+Functions
+Personalized communication
+Channel optimization
+Delivery status monitoring
+Integrations
+Notification Gateway ↔ CRM ↔ Courier APIs
+Output
+Customer Updated
+P12 – Delivery Confirmation & Workflow Closure
+Activities
+Confirm delivery
+Capture acknowledgement
+Update CBS
+Close workflow
+Archive documents
+Record audit evidence
+Calculate SLA
+Generate MIS
+Human Roles
+Operations Manager
+Internal Auditor
+Compliance Officer
+Systems
+OpenLayer Workflow Engine
+Core Banking System
+Monitoring Dashboard
+Blockchain Trust Layer
+AI Agent
+Workflow Monitoring Agent
+Functions
+SLA calculation
+KPI generation
+Workflow health analysis
+Operational insights
+Audit evidence validation
+Integrations
+Workflow Engine ↔ CBS ↔ Analytics ↔ Blockchain Trust Layer ↔ Audit Repository
+Output
+Workflow Successfully Closed
+
+TOTAL CHARS: 6841
+
+================================================================================
+OpenLayer_Execution_UI_and_Generic_Test_Run_Plans.docx
+================================================================================
+OpenLayer — Execution UI & Generic Process Test Run
+Combined Implementation Plans
+Sources: execution_ui_colors_5e6704fd · generic_process_test_run_63c174fc
+Executive Summary
+This document combines two related plans that improve the workflow-builder Test Run experience: (1) a responsive Execution Monitor with a clear red/green/yellow status color contract, and (2) genericizing the AI Runtime Test Run path so every workflow/process uses the same canvas monitor—not only Cheque Book.
+Combined Goals
+Responsive Execution Progress + Execution Details layout that scales on mobile and desktop.
+Single status palette: running=red, completed=green, failed=yellow (shared by canvas, progress, details, and process cards).
+Compact process carousel cards colored by live Test Run status.
+Toolbar buttons aligned to project button-color (#1e3a8a).
+Generic ProcessCanvasRunner + templates for any workflow_id (remove WF-CHEQUE-BOOK hardcoding from the engine path).
+Empty-canvas fallback and agent soft-fail for newly created / non–Cheque Book workflows.
+Overall Status
+Plan
+Todo
+Status
+Execution UI Colors
+Update executionStatus.js palette (red/green/yellow)
+Completed
+Execution UI Colors
+Rebuild compact responsive ExecutionProgress + ExecutionDetails
+Completed
+Execution UI Colors
+Fix monitor grid, shrink process cards, apply button-color
+Completed
+Execution UI Colors
+Confirm canvas/node rings pick up new palette
+Completed
+Generic Process Test Run
+Shrink process cards + color by Test Run status
+Completed
+Generic Process Test Run
+Extract generic ProcessCanvasRunner + templates
+Completed
+Generic Process Test Run
+Any-workflow Test Run + empty-canvas template + soft-fail
+Completed
+Part 1 — Responsive Execution Monitor + Red/Green Status
+Overview: Fix the workflow-builder Test Run monitor layout so it scales responsively, apply a clear red-to-green execution color contract (yellow for failed), shrink oversized process cards, and align toolbar buttons with the project button-color theme.
+1.1 Color Contract (Single Source of Truth)
+Update FT-OPEN-LAYER-FE/src/utils/executionStatus.js so canvas rings, edges, Execution Progress, and Execution Details all share one palette:
+Status
+Color
+Meaning
+running
+Red (#dc2626)
+Currently executing
+completed
+Green (#16a34a)
+Fully executed
+failed
+Yellow/amber (#ca8a04)
+Failed (distinct from running red)
+skipped
+Muted amber
+API skip (unchanged behavior)
+pending
+Gray
+Not started
+hitl_wait
+Soft violet
+Waiting for human
+Replay behavior (already in handleTestRun): each step paints red while running, then green when completed (or yellow if failed). Agent library accents stay only as a small badge/dot — status color owns the card border/fill during Test Run.
+1.2 Layout / Scaling Fixes
+Monitor row in designer
+In DragDropDesigner.jsx, replace the cramped xl:grid-cols-[2fr_1fr] monitor block with a responsive shell:
+Mobile: stacked (Execution Progress full width, then Execution Details)
+Desktop: minmax(0,1fr) + fixed narrow details (~280px) so progress can grow without crushing
+Cap monitor height + internal scroll so the page does not stretch endlessly when P01–P12 all have steps
+Compact Execution Progress
+Rewrite ExecutionProgress.jsx:
+Slim header: title, completed/total, run status chip, short legend (Running=red, Done=green, Failed=yellow)
+Process lanes as compact rows (not tall nested cards)
+Node chips ~88–96px wide, 2-line title max, status + duration only (message moves to Details)
+Horizontal scroll per process; vertical scroll for many processes
+Selected chip uses project navy ring (#1e3a8a) plus status fill
+Progress bar: red to green gradient matching the contract
+Compact Execution Details
+Update ExecutionDetails.jsx to the same density: status chip with red/green/yellow, short metadata rows, scrollable message — no oversized empty panels.
+Canvas status painting
+WorkflowCanvas.jsx / node rings already consume executionStatus.js — after the palette change, running edges/nodes turn red, completed green, failed yellow; animate only running.
+Shrink process carousel cards
+In the bottom Processes strip in DragDropDesigner.jsx (previously w-72 h-40):
+Reduce to ~w-44 h-24 (or min-w-[10rem] h-20) — further tightened in Part 2 to ~w-36 h-16
+Smaller number badge, tighter padding, 1–2 line title
+Selected border stays project navy (#1e3a8a)
+Toolbar button colors (project theme)
+Align header actions with --button-color / .button-color (#1e3a8a):
+Test Run: solid button-color + white text (primary run action)
+Save / Configure Subworkflow: white + navy border/text
+Delete Canvas: red outline (destructive)
+Create Process: keep solid button-color
+1.3 Out of Scope (Part 1)
+Backend trace schema / canvas_runner logic (already returns statuses)
+Full redesign of left ComponentsPanel or NodeProperties form fields
+Part 2 — Generic Test Run + Compact Process Cards
+Overview: Shrink the process carousel cards and generalize AI Runtime Test Run / Execution Progress so every workflow and process (existing and newly created) uses the same canvas monitor path—not only Cheque Book.
+2.1 Problem Statement
+Bottom process cards still look large with extra whitespace/chevrons.
+Backend monitor path is imported from Cheque Book only (execution_engine.py → workflows.banking.cheque_book.canvas_runner), and templates hardcode WF-CHEQUE-BOOK. New/other workflows do not get the same empty-canvas fallback or seed behavior.
+Process cards always show static Ready — they do not reflect Test Run red/green/yellow status.
+Default for empty canvases: use a generic Start → AI Agent → API/Connector → End template for any workflow (same as Cheque Book linear; P07-style gateway stays Cheque Book-specific only when process name/code matches P07).
+Architecture Flow
+Designer (any workflowId) → POST /ai_runtime/execute → ExecutionEngine → Resolve mapped or GenericAgent + Generic ProcessCanvasRunner → Trace (steps / node / edge statuses) → Execution Progress + process cards
+2.2 Compact Process Carousel (FE)
+In DragDropDesigner.jsx process strip:
+Shrink cards to ~w-36 h-16 (or min-w-[8.5rem] h-14)
+Tighter padding; drop the empty Selected spacer line (use border/ring only)
+Smaller number badge; smaller Ready/status pill + node count on one row
+Replace large ChevronRight (size 28) with a thin connector (w-3 or size 14)
+Reduce horizontal gap and top padding so the strip is denser at 100% zoom
+Execution status on cards — derive from selectedExecution.steps / process name:
+Process run state
+Card accent
+running
+red
+completed (all steps done)
+green
+failed
+yellow
+skipped-only / pending
+gray / existing Ready
+Use statusPalette from executionStatus.js so process cards match Execution Progress.
+2.3 Move Canvas Runner to a Generic Package (BE)
+Promote Cheque Book–local monitor code to shared runtime:
+ProcessCanvasRunner → app/ai_runtime/orchestrator/canvas_runner.py
+Generic templates → app/ai_runtime/orchestrator/process_templates.py
+Remove hardcoded workflow_code: "WF-CHEQUE-BOOK"; pass workflow_code / process_name as parameters
+Keep P07 gateway template only when process name/code starts with P07 or design already has a gateway node; otherwise always linear generic template
+Leave thin re-exports under cheque_book/ so existing imports do not break
+Update execution_engine.py to import the generic runner/templates.
+2.4 Agent Execution for Any Workflow
+Keep current flow: resolve subworkflow.ai_agents by name/id → AgentRouter → registered class or GenericAgent.
+Ensure:
+Soft-fail inactive/missing agents (already partially done) so monitor still returns steps
+Prefer ACTIVE agent when duplicates exist (already done)
+No Cheque Book–only early return; every workflow_id walks all phases/subworkflows the same way
+Cheque Book banking graphs stay as specialized agents; other agents use GenericAgent / future LLM wiring without FE changes.
+2.5 Empty Canvas for Any Workflow
+On Test Run, if design_json is empty:
+Build generic template in memory
+Persist onto that subworkflow (same as Cheque Book today)
+Return process_canvases so FE paints nodes for any workflow
+Optional seed helper: rename/generalize seed_cheque_book_process_canvases to seed empty canvases for a given workflow_id or all workflows with empty designs (call from seed or first Test Run only).
+2.6 FE Already Mostly Generic — Small Harden
+handleTestRun already posts current workflowId. Confirm:
+Applies process_canvases for any process ids
+Replay + Execution Progress work off API steps (already process-grouped)
+No Cheque Book string checks in FE monitor path
+2.7 Out of Scope (Later)
+Real LLM/API key wiring per agent
+Full Card Dispatch redesign
+SSE streaming
+2.8 Implementation Order
+1. Compact process cards + execution-status coloring
+2. Extract generic canvas_runner + process_templates; wire ExecutionEngine
+3. Verify Test Run on Cheque Book and a second/non–Cheque Book workflow (or newly created process) returns steps + canvases
+Key Files Touched
+Frontend
+FT-OPEN-LAYER-FE/src/utils/executionStatus.js — status palette
+FT-OPEN-LAYER-FE/src/components/dragDropComponents/ExecutionProgress.jsx
+FT-OPEN-LAYER-FE/src/components/dragDropComponents/ExecutionDetails.jsx
+FT-OPEN-LAYER-FE/src/components/dragDropComponents/WorkflowCanvas.jsx
+FT-OPEN-LAYER-FE/src/pages/drag_drop/DragDropDesigner.jsx — monitor layout, process cards, toolbar, handleTestRun
+Backend
+FT-OPEN-LAYER-BE/app/ai_runtime/orchestrator/canvas_runner.py — generic ProcessCanvasRunner
+FT-OPEN-LAYER-BE/app/ai_runtime/orchestrator/process_templates.py — generic templates
+FT-OPEN-LAYER-BE/app/ai_runtime/orchestrator/execution_engine.py — import generic runner
+FT-OPEN-LAYER-BE/app/ai_runtime/workflows/banking/cheque_book/* — thin re-exports / specialized graphs
+
+TOTAL CHARS: 9659

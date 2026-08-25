@@ -1,0 +1,629 @@
+﻿==== app\ai_runtime\__pycache__\__init__.cpython-312.pyc
+DOC: 'AI Runtime package for OpenLayer agent execution.'
+IMPORTS/NAMES: ('__doc__', '__version__')
+==== app\ai_runtime\connectors\__pycache__\__init__.cpython-312.pyc
+DOC: 'Runtime connector implementations.'
+IMPORTS/NAMES: ('__doc__',)
+==== app\ai_runtime\connectors\__pycache__\rest_connector.cpython-312.pyc
+DOC: 'REST connector placeholder.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.foundation.base_connector', 'BaseConnector', 'RestConnector')
+ CLASS/FUNC RestConnector
+  names: ('__name__', '__module__', '__qualname__', 'name', 'bool', 'connect')
+  varnames: ()
+   method connect args ('self',)
+==== app\ai_runtime\foundation\__pycache__\__init__.cpython-312.pyc
+DOC: 'Foundation exports for the AI Runtime.'
+IMPORTS/NAMES: ('__doc__', '__all__', '__getattr__')
+ CLASS/FUNC __getattr__
+  names: ('app.ai_runtime.foundation.audit', 'AuditService', 'app.ai_runtime.foundation.base_agent', 'BaseAgent', 'app.ai_runtime.foundation.base_connector', 'BaseConnector', 'app.ai_runtime.foundation.base_tool', 'BaseTool', 'app.ai_runtime.foundation.generic_agent', 'GenericAgent', 'app.ai_runtime.foundation.identity', 'IdentityService', 'app.ai_runtime.foundation.integration', 'IntegrationService', 'app.ai_runtime.foundation.knowledge', 'KnowledgeService', 'app.ai_runtime.foundation.memory', 'MemoryService', 'app.ai_runtime.foundation.prompt_manager', 'PromptManager', 'app.ai_runtime.foundation.security', 'SecurityService', 'app.ai_runtime.foundation.workflow_engine', 'WorkflowEngine', 'AttributeError')
+  varnames: ('name', 'AuditService', 'BaseAgent', 'BaseConnector', 'BaseTool', 'GenericAgent', 'IdentityService', 'IntegrationService', 'KnowledgeService', 'MemoryService', 'PromptManager', 'SecurityService', 'WorkflowEngine')
+==== app\ai_runtime\foundation\__pycache__\audit.cpython-312.pyc
+DOC: 'Audit logging into existing workflow execution tables.'
+IMPORTS/NAMES: ('__doc__', 'datetime', 'sqlalchemy.orm', 'Session', 'app.ai_runtime.foundation.models', 'AgentExecutionHistory', 'RuntimeEventLog', 'app.ai_runtime.foundation.schemas', 'AgentResult', 'WorkflowResult', 'app.ai_runtime.utils.helpers', 'safe_json_dumps', 'truncate_text', 'app.modules.logs.models', 'AuditLogs', 'app.modules.automation.models', 'SubWorkflowExecution', 'WorkflowExecution', 'AuditService')
+ CLASS/FUNC AuditService
+  names: ('__name__', '__module__', '__qualname__', 'Session', 'AgentResult', 'int', 'log_agent_result', 'WorkflowExecution', 'start_workflow_execution', 'WorkflowResult', 'finish_workflow_execution', 'log_subworkflow', 'datetime', 'persist_agent_history', 'list_agent_history', 'str', 'get_agent_history', 'dict', 'persist_event', 'list_events')
+  varnames: ()
+   method log_agent_result args ('self', 'db', 'result', 'user_id', 'org_id')
+    str EXECUTE_AGENT
+    str AI_AGENT
+   method start_workflow_execution args ('self', 'db', 'workflow_id', 'phase_id', 'total', 'execution')
+    str Running
+    str AI Runtime execution started.
+   method finish_workflow_execution args ('self', 'db', 'execution', 'result', 'item')
+    str completed
+    str Completed
+    str Failed
+   method log_subworkflow args ('self', 'db', 'subworkflow_id', 'result')
+    str completed
+    str Completed
+    str Failed
+   method persist_agent_history args ('self', 'db', 'result', 'workflow_id', 'started_at')
+   method list_agent_history args ('self', 'db', 'limit')
+   method get_agent_history args ('self', 'db', 'execution_id')
+   method persist_event args ('self', 'db', 'execution_id', 'event_type', 'payload', 'source')
+   method list_events args ('self', 'db', 'execution_id')
+==== app\ai_runtime\foundation\__pycache__\base_agent.cpython-312.pyc
+DOC: 'Base class for all executable agents.'
+IMPORTS/NAMES: ('__doc__', 'abc', 'ABC', 'abstractmethod', 'sqlalchemy.orm', 'Session', 'app.ai_runtime.foundation.schemas', 'AgentIdentity', 'AgentResult', 'ExecutionContext', 'LLMResponse', 'app.ai_runtime.llm.provider_router', 'ProviderRouter', 'app.ai_runtime.utils.config', 'AIRuntimeConfig', 'BaseAgent')
+ CLASS/FUNC BaseAgent
+  names: ('__name__', '__module__', '__qualname__', 'AgentIdentity', 'ExecutionContext', 'Session', '__init__', 'abstractmethod', 'dict', 'AgentResult', 'execute', 'list', 'LLMResponse', 'call_llm')
+  varnames: ()
+   method __init__ args ('self', 'identity', 'context', 'db')
+   method execute args ('self', 'input_data')
+   method call_llm args ('self', 'messages', 'provider', 'model')
+==== app\ai_runtime\foundation\__pycache__\base_connector.cpython-312.pyc
+DOC: 'Base class for runtime connectors.'
+IMPORTS/NAMES: ('__doc__', 'abc', 'ABC', 'abstractmethod', 'BaseConnector')
+ CLASS/FUNC BaseConnector
+  names: ('__name__', '__module__', '__qualname__', 'name', 'abstractmethod', 'bool', 'connect')
+  varnames: ()
+   method connect args ('self',)
+==== app\ai_runtime\foundation\__pycache__\base_tool.cpython-312.pyc
+DOC: 'Base class for runtime tools.'
+IMPORTS/NAMES: ('__doc__', 'abc', 'ABC', 'abstractmethod', 'app.ai_runtime.foundation.schemas', 'ToolResult', 'BaseTool')
+ CLASS/FUNC BaseTool
+  names: ('__name__', '__module__', '__qualname__', 'name', 'abstractmethod', 'dict', 'ToolResult', 'execute')
+  varnames: ()
+   method execute args ('self', 'input_data')
+==== app\ai_runtime\foundation\__pycache__\generic_agent.cpython-312.pyc
+DOC: 'Default executable agent used before specialized agents exist.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.foundation.base_agent', 'BaseAgent', 'app.ai_runtime.foundation.prompt_manager', 'PromptManager', 'app.ai_runtime.foundation.schemas', 'AgentResult', 'GenericAgent')
+ CLASS/FUNC GenericAgent
+  names: ('__name__', '__module__', '__qualname__', 'dict', 'AgentResult', 'execute')
+  varnames: ()
+   method execute args ('self', 'input_data', 'prompt_manager', 'messages', 'llm_response')
+    str completed
+    str response
+    str agent_name
+==== app\ai_runtime\foundation\__pycache__\identity.cpython-312.pyc
+DOC: 'Resolve runtime agent identity from existing AI agent tables.'
+IMPORTS/NAMES: ('__doc__', 'sqlalchemy.orm', 'Session', 'app.ai_runtime.foundation.schemas', 'AgentIdentity', 'app.ai_runtime.utils.exceptions', 'AgentNotFoundError', 'app.modules.ai_agents', 'models', 'IdentityService')
+ CLASS/FUNC IdentityService
+  names: ('__name__', '__module__', '__qualname__', 'int', 'Session', 'AgentIdentity', 'resolve_agent', 'str', 'resolve_agent_by_code', 'list', 'get_agent_tools', 'models', 'WorkflowAiAgent', '_build_identity', 'staticmethod', '_get', '_mapping_ids')
+  varnames: ()
+   method resolve_agent args ('self', 'agent_id', 'db', 'agent')
+    str AI agent 
+    str  not found
+    str AGENT_NOT_FOUND
+   method resolve_agent_by_code args ('self', 'agent_code', 'db', 'agent')
+    str AI agent 
+    str  not found
+    str AGENT_NOT_FOUND
+   method get_agent_tools args ('self', 'agent_id', 'db', 'row')
+   method _build_identity args ('self', 'agent', 'db', 'category', 'sub_category', 'agent_type', 'execution_mode', 'classification', 'sla', 'knowledge_base', 'llm_model')
+    str category_id
+    str sub_category_id
+    str agent_type_id
+    str execution_mode_id
+    str security_classification_id
+   method _get args ('db', 'model', 'id_attr', 'value')
+   method _mapping_ids args ('db', 'model', 'id_attr', 'agent_id', 'row')
+==== app\ai_runtime\foundation\__pycache__\integration.cpython-312.pyc
+DOC: 'Integration coordinator placeholder.'
+IMPORTS/NAMES: ('__doc__', 'IntegrationService')
+ CLASS/FUNC IntegrationService
+  names: ('__name__', '__module__', '__qualname__', 'list', 'str', 'available_connectors')
+  varnames: ()
+   method available_connectors args ('self',)
+==== app\ai_runtime\foundation\__pycache__\knowledge.cpython-312.pyc
+DOC: 'Knowledge context loading placeholder for future RAG integration.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.foundation.schemas', 'AgentIdentity', 'ExecutionContext', 'KnowledgeService')
+ CLASS/FUNC KnowledgeService
+  names: ('__name__', '__module__', '__qualname__', 'AgentIdentity', 'ExecutionContext', 'dict', 'load_context')
+  varnames: ()
+   method load_context args ('self', 'identity', 'context')
+==== app\ai_runtime\foundation\__pycache__\memory.cpython-312.pyc
+DOC: 'Database-backed memory coordinator.'
+IMPORTS/NAMES: ('__doc__', 'datetime', 'timedelta', 'typing', 'Any', 'sqlalchemy.orm', 'Session', 'app.ai_runtime.foundation.models', 'AgentMemory', 'app.ai_runtime.utils.helpers', 'safe_json_dumps', 'safe_json_loads', 'MemoryService')
+ CLASS/FUNC MemoryService
+  names: ('__name__', '__module__', '__qualname__', 'Session', 'str', 'Any', 'int', 'AgentMemory', 'set', 'get')
+  varnames: ()
+   method set args ('self', 'db', 'session_id', 'key', 'value', 'agent_id', 'memory_type', 'ttl_seconds', 'org_id', 'expires_at', 'item')
+   method get args ('self', 'db', 'session_id', 'key', 'agent_id', 'default', 'item')
+==== app\ai_runtime\foundation\__pycache__\models.cpython-312.pyc
+DOC: 'Database models owned by the AI Runtime.'
+IMPORTS/NAMES: ('__doc__', 'sqlalchemy', 'Column', 'DateTime', 'Float', 'ForeignKey', 'Integer', 'String', 'Text', 'sqlalchemy.sql', 'func', 'app.db.base', 'Base', 'AgentMemory', 'AgentExecutionHistory', 'RuntimeEventLog')
+ CLASS/FUNC AgentMemory
+  names: ('__name__', '__module__', '__qualname__', '__tablename__', 'Column', 'Integer', 'id', 'String', 'session_id', 'ForeignKey', 'agent_id', 'memory_type', 'key', 'Text', 'value', 'metadata_json', 'ttl_seconds', 'DateTime', 'expires_at', 'org_id', 'func', 'now', 'created_at', 'updated_at')
+  varnames: ()
+ CLASS/FUNC AgentExecutionHistory
+  names: ('__name__', '__module__', '__qualname__', '__tablename__', 'Column', 'Integer', 'id', 'String', 'execution_id', 'ForeignKey', 'agent_id', 'workflow_id', 'status', 'DateTime', 'started_at', 'ended_at', 'tokens_input', 'tokens_output', 'Float', 'cost', 'Text', 'response', 'error', 'func', 'now', 'created_at')
+  varnames: ()
+ CLASS/FUNC RuntimeEventLog
+  names: ('__name__', '__module__', '__qualname__', '__tablename__', 'Column', 'Integer', 'id', 'String', 'execution_id', 'event_type', 'source', 'Text', 'payload', 'DateTime', 'func', 'now', 'created_at')
+  varnames: ()
+==== app\ai_runtime\foundation\__pycache__\prompt_manager.cpython-312.pyc
+DOC: 'Prompt rendering for runtime agents.'
+IMPORTS/NAMES: ('__doc__', 'string', 'Template', 'app.ai_runtime.foundation.schemas', 'AgentIdentity', 'app.ai_runtime.utils.exceptions', 'PromptRenderError', 'PromptManager')
+ CLASS/FUNC PromptManager
+  names: ('__name__', '__module__', '__qualname__', 'AgentIdentity', 'dict', 'str', 'render_system_prompt', 'list', 'build_runtime_prompt')
+  varnames: ()
+   method render_system_prompt args ('self', 'identity', 'input_data', 'knowledge_context', 'template', 'key', 'value', 'variables', 'exc')
+    str You are $agent_name. Process the user request safely.
+    str context
+    str PROMPT_RENDER_FAILED
+   method build_runtime_prompt args ('self', 'identity', 'input_data', 'memory', 'knowledge_context', 'task_prompt', 'system_prompt', 'memory_text', 'user_prompt')
+    str 
+Memory:
+
+    str message
+    str system
+==== app\ai_runtime\foundation\__pycache__\schemas.cpython-312.pyc
+DOC: 'Runtime transfer objects.'
+IMPORTS/NAMES: ('__doc__', '__future__', 'annotations', 'dataclasses', 'dataclass', 'field', 'datetime', 'typing', 'Any', 'AgentIdentity', 'ExecutionContext', 'LLMResponse', 'AgentResult', 'ToolResult', 'WorkflowResult', 'Event')
+ CLASS/FUNC AgentIdentity
+  names: ('__name__', '__module__', '__qualname__', '__annotations__', 'description', 'agent_type_name', 'category_name', 'sub_category_name', 'execution_mode', 'llm_provider', 'llm_model_name', 'prompt_template', 'default_temperature', 'max_tokens', 'timeout_seconds', 'knowledge_base_name', 'security_classification', 'sla_name', 'field', 'list', 'input_type_ids', 'output_type_ids', 'supported_system_ids', 'is_active', 'version', 'org_id')
+  varnames: ()
+ CLASS/FUNC ExecutionContext
+  names: ('__name__', '__module__', '__qualname__', '__annotations__', 'agent_identity', 'workflow_id', 'phase_id', 'subworkflow_id', 'user_id', 'org_id', 'field', 'dict', 'input_data', 'memory', 'metadata', 'parent_execution_id', 'started_at')
+  varnames: ()
+ CLASS/FUNC LLMResponse
+  names: ('__name__', '__module__', '__qualname__', '__annotations__', 'tokens_input', 'tokens_output', 'latency_ms', 'finish_reason', 'raw_response')
+  varnames: ()
+ CLASS/FUNC AgentResult
+  names: ('__name__', '__module__', '__qualname__', '__annotations__', 'status', 'field', 'dict', 'output_data', 'error_message', 'llm_response', 'execution_time_ms', 'metadata')
+  varnames: ()
+ CLASS/FUNC ToolResult
+  names: ('__name__', '__module__', '__qualname__', '__annotations__', 'status', 'output', 'error', 'execution_time_ms')
+  varnames: ()
+ CLASS/FUNC WorkflowResult
+  names: ('__name__', '__module__', '__qualname__', '__annotations__', 'status', 'steps_completed', 'steps_total', 'field', 'list', 'step_results', 'dict', 'output_data', 'error_message', 'execution_time_ms')
+  varnames: ()
+ CLASS/FUNC Event
+  names: ('__name__', '__module__', '__qualname__', '__annotations__', 'field', 'dict', 'payload', 'datetime', 'utcnow', 'timestamp', 'source', 'execution_id')
+  varnames: ()
+==== app\ai_runtime\foundation\__pycache__\security.cpython-312.pyc
+DOC: 'Runtime security checks.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.foundation.schemas', 'AgentIdentity', 'ExecutionContext', 'app.ai_runtime.utils.constants', 'AgentStatus', 'app.ai_runtime.utils.exceptions', 'SecurityRuntimeError', 'SecurityService')
+ CLASS/FUNC SecurityService
+  names: ('__name__', '__module__', '__qualname__', 'AgentIdentity', 'ExecutionContext', 'validate_agent_execution')
+  varnames: ()
+   method validate_agent_execution args ('self', 'identity', 'context')
+    str Agent 
+    str  is not active
+    str AGENT_NOT_ACTIVE
+==== app\ai_runtime\foundation\__pycache__\workflow_engine.cpython-312.pyc
+DOC: 'Workflow step utilities.'
+IMPORTS/NAMES: ('__doc__', 'app.modules.automation.models', 'SubWorkflow', 'WorkflowEngine')
+ CLASS/FUNC WorkflowEngine
+  names: ('__name__', '__module__', '__qualname__', 'list', 'SubWorkflow', 'ordered_subworkflows')
+  varnames: ()
+   method ordered_subworkflows args ('self', 'subworkflows')
+==== app\ai_runtime\llm\__pycache__\__init__.cpython-312.pyc
+DOC: 'LLM routing exports.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.llm.base_provider', 'BaseLLMProvider', 'app.ai_runtime.llm.provider_router', 'ProviderRouter', 'app.ai_runtime.llm.stub_provider', 'StubProvider', '__all__')
+==== app\ai_runtime\llm\__pycache__\base_provider.cpython-312.pyc
+DOC: 'Base LLM provider contract.'
+IMPORTS/NAMES: ('__doc__', 'abc', 'ABC', 'abstractmethod', 'app.ai_runtime.foundation.schemas', 'LLMResponse', 'BaseLLMProvider')
+ CLASS/FUNC BaseLLMProvider
+  names: ('__name__', '__module__', '__qualname__', 'provider_name', 'abstractmethod', 'list', 'dict', 'str', 'LLMResponse', 'chat', 'generate', 'int', 'count_tokens', 'bool', 'is_available')
+  varnames: ()
+   method chat args ('self', 'messages', 'model', 'kwargs')
+   method generate args ('self', 'prompt', 'model', 'kwargs')
+   method count_tokens args ('self', 'text', 'model')
+   method is_available args ('self',)
+==== app\ai_runtime\llm\__pycache__\provider_router.cpython-312.pyc
+DOC: 'Route LLM requests to available providers.'
+IMPORTS/NAMES: ('__doc__', 'sqlalchemy.orm', 'Session', 'app.ai_runtime.llm.base_provider', 'BaseLLMProvider', 'app.ai_runtime.llm.stub_provider', 'StubProvider', 'app.ai_runtime.utils.config', 'AIRuntimeConfig', 'app.modules.ai_agents.models', 'MasterLlmModel', 'ProviderRouter')
+ CLASS/FUNC ProviderRouter
+  names: ('__name__', '__module__', '__qualname__', 'PROVIDER_ALIASES', '__init__', 'str', 'normalize_provider', 'BaseLLMProvider', 'get_provider', 'list', 'dict', 'chat', 'generate', 'list_available_providers', 'Session', 'list_available_models')
+  varnames: ()
+   method __init__ args ('self',)
+   method normalize_provider args ('self', 'provider_name', 'value')
+   method get_provider args ('self', 'provider_name', 'normalized')
+   method chat args ('self', 'provider', 'model', 'messages', 'kwargs', 'selected')
+   method generate args ('self', 'provider', 'model', 'prompt', 'kwargs', 'selected')
+   method list_available_providers args ('self', 'name', 'provider')
+    str not_configured
+   method list_available_models args ('self', 'db', 'row')
+==== app\ai_runtime\llm\__pycache__\stub_provider.cpython-312.pyc
+DOC: 'Deterministic provider used until real SDK providers are enabled.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.foundation.schemas', 'LLMResponse', 'app.ai_runtime.llm.base_provider', 'BaseLLMProvider', 'StubProvider')
+ CLASS/FUNC StubProvider
+  names: ('__name__', '__module__', '__qualname__', 'provider_name', 'list', 'dict', 'str', 'LLMResponse', 'chat', 'bool', 'is_available')
+  varnames: ()
+   method chat args ('self', 'messages', 'model', 'kwargs', 'user_message', 'content')
+    str Stub AI response for: 
+    str stub-model
+   method is_available args ('self',)
+==== app\ai_runtime\master_agents\__pycache__\__init__.cpython-312.pyc
+DOC: 'Master agent package.'
+IMPORTS/NAMES: ('__doc__',)
+==== app\ai_runtime\master_agents\__pycache__\master_agent_factory.cpython-312.pyc
+DOC: 'Factory for resolving master agent classes from runtime identity.'
+IMPORTS/NAMES: ('__doc__', 'importlib', 'app.ai_runtime.foundation.generic_agent', 'GenericAgent', 'MasterAgentFactory')
+ CLASS/FUNC MasterAgentFactory
+  names: ('__name__', '__module__', '__qualname__', 'CATEGORY_MAP', 'classmethod', 'str', 'load_agent_class', 'get_agent_class')
+  varnames: ()
+   method load_agent_class args ('cls', 'class_path', 'module_path', 'class_name', 'module')
+   method get_agent_class args ('cls', 'identity', 'explicit_path', 'category', 'class_path')
+    str agent_class_path=
+==== app\ai_runtime\master_agents\document_intelligence\__pycache__\__init__.cpython-312.pyc
+DOC: 'Document intelligence master agents.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.master_agents.document_intelligence.document_master_agent', 'DocumentMasterAgent', '__all__')
+==== app\ai_runtime\master_agents\document_intelligence\__pycache__\document_master_agent.cpython-312.pyc
+DOC: 'First real Master Agent for document/file intelligence workflows.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.foundation.base_agent', 'BaseAgent', 'app.ai_runtime.foundation.schemas', 'AgentResult', 'app.ai_runtime.registry.connector_registry', 'ConnectorRegistry', 'app.ai_runtime.registry.tool_registry', 'ToolRegistry', 'DocumentMasterAgent')
+ CLASS/FUNC DocumentMasterAgent
+  names: ('__name__', '__module__', '__qualname__', '__doc__', 'DEFAULT_TOOL_ORDER', '__init__', 'dict', 'AgentResult', 'execute', 'load_tools', 'load_connectors', 'run_workflow', '__classcell__')
+  varnames: ()
+   method __init__ args ('self', 'identity', 'context', 'db')
+   method execute args ('self', 'input_data', 'tools', 'connectors', 'tool_results', 'item', 'failed', 'connector')
+    str completed
+    str failed
+    str DocumentMasterAgent
+    str category
+   method load_tools args ('self', 'input_data', 'requested', 'name')
+   method load_connectors args ('self', 'input_data', 'requested', 'name')
+    str connectors
+   method run_workflow args ('self', 'tools', 'connectors', 'input_data', 'state', 'connector', 'results', 'tool', 'result')
+    str connectors
+    str completed
+==== app\ai_runtime\memory\__pycache__\__init__.cpython-312.pyc
+DOC: 'Memory subsystem exports.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.memory.cache', 'Cache', 'app.ai_runtime.memory.long_term', 'LongTermMemory', 'app.ai_runtime.memory.session_memory', 'SessionMemory', 'app.ai_runtime.memory.short_term', 'ShortTermMemory', '__all__')
+==== app\ai_runtime\memory\__pycache__\cache.cpython-312.pyc
+DOC: 'Simple in-memory TTL cache.'
+IMPORTS/NAMES: ('__doc__', 'datetime', 'timedelta', 'typing', 'Any', 'Cache')
+ CLASS/FUNC Cache
+  names: ('__name__', '__module__', '__qualname__', '_items', 'dict', 'str', 'tuple', 'Any', 'datetime', '__annotations__', 'int', 'set', 'get', 'delete')
+  varnames: ()
+   method set args ('self', 'key', 'value', 'ttl_seconds', 'expires_at')
+   method get args ('self', 'key', 'default', 'item', 'value', 'expires_at')
+   method delete args ('self', 'key')
+==== app\ai_runtime\memory\__pycache__\long_term.cpython-312.pyc
+DOC: 'Long-term memory wrapper.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.foundation.memory', 'MemoryService', 'LongTermMemory')
+ CLASS/FUNC LongTermMemory
+  names: ('__name__', '__module__', '__qualname__', 'memory_type')
+  varnames: ()
+==== app\ai_runtime\memory\__pycache__\session_memory.cpython-312.pyc
+DOC: 'Session memory wrapper.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.foundation.memory', 'MemoryService', 'SessionMemory')
+ CLASS/FUNC SessionMemory
+  names: ('__name__', '__module__', '__qualname__', 'memory_type')
+  varnames: ()
+==== app\ai_runtime\memory\__pycache__\short_term.cpython-312.pyc
+DOC: 'Short-term memory wrapper.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.foundation.memory', 'MemoryService', 'ShortTermMemory')
+ CLASS/FUNC ShortTermMemory
+  names: ('__name__', '__module__', '__qualname__', 'memory_type')
+  varnames: ()
+==== app\ai_runtime\monitoring\__pycache__\__init__.cpython-312.pyc
+DOC: 'Monitoring exports.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.monitoring.audit_logger', 'AuditLogger', 'app.ai_runtime.monitoring.logger', 'RuntimeLogger', 'app.ai_runtime.monitoring.metrics', 'MetricsCollector', 'app.ai_runtime.monitoring.telemetry', 'Telemetry', 'app.ai_runtime.monitoring.tracing', 'Tracer', '__all__')
+==== app\ai_runtime\monitoring\__pycache__\audit_logger.cpython-312.pyc
+DOC: 'Monitoring wrapper around AuditService.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.foundation.audit', 'AuditService', 'AuditLogger')
+ CLASS/FUNC AuditLogger
+  names: ('__name__', '__module__', '__qualname__', '__init__')
+  varnames: ()
+   method __init__ args ('self',)
+==== app\ai_runtime\monitoring\__pycache__\logger.cpython-312.pyc
+DOC: 'Structured logger wrapper.'
+IMPORTS/NAMES: ('__doc__', 'json', 'logging', 'datetime', 'RuntimeLogger')
+ CLASS/FUNC RuntimeLogger
+  names: ('__name__', '__module__', '__qualname__', 'str', 'int', '__init__', '_log', 'info', 'warning', 'error')
+  varnames: ()
+   method __init__ args ('self', 'name', 'agent_id', 'handler')
+    str ai_runtime.
+    str %(message)s
+   method _log args ('self', 'level', 'message', 'context', 'payload')
+   method info args ('self', 'message', 'context')
+   method warning args ('self', 'message', 'context')
+    str WARNING
+   method error args ('self', 'message', 'context')
+==== app\ai_runtime\monitoring\__pycache__\metrics.cpython-312.pyc
+DOC: 'In-memory runtime metrics.'
+IMPORTS/NAMES: ('__doc__', 'MetricsCollector')
+ CLASS/FUNC MetricsCollector
+  names: ('__name__', '__module__', '__qualname__', '_metrics', 'str', 'record_execution', 'dict', 'get_system_metrics', 'reset')
+  varnames: ()
+   method record_execution args ('self', 'status')
+    str executions
+    str completed
+    str errors
+   method get_system_metrics args ('self',)
+   method reset args ('self',)
+==== app\ai_runtime\monitoring\__pycache__\telemetry.cpython-312.pyc
+DOC: 'Runtime health telemetry.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.llm.provider_router', 'ProviderRouter', 'Telemetry')
+ CLASS/FUNC Telemetry
+  names: ('__name__', '__module__', '__qualname__', 'dict', 'get_system_health')
+  varnames: ()
+   method get_system_health args ('self',)
+    str healthy
+    str ai_runtime
+==== app\ai_runtime\monitoring\__pycache__\tracing.cpython-312.pyc
+DOC: 'In-memory execution tracing.'
+IMPORTS/NAMES: ('__doc__', 'datetime', 'uuid', 'uuid4', 'Tracer')
+ CLASS/FUNC Tracer
+  names: ('__name__', '__module__', '__qualname__', '_traces', 'dict', 'str', 'list', '__annotations__', 'add_span', 'get_trace')
+  varnames: ()
+   method add_span args ('self', 'execution_id', 'span_name', 'metadata', 'span_id')
+   method get_trace args ('self', 'execution_id')
+==== app\ai_runtime\orchestrator\__pycache__\__init__.cpython-312.pyc
+DOC: 'Orchestrator exports.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.orchestrator.event_bus', 'EventBus', 'app.ai_runtime.orchestrator.execution_engine', 'ExecutionEngine', 'app.ai_runtime.orchestrator.workflow_orchestrator', 'WorkflowOrchestrator', '__all__')
+==== app\ai_runtime\orchestrator\__pycache__\agent_router.cpython-312.pyc
+DOC: 'Resolve agent implementations dynamically.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.master_agents.master_agent_factory', 'MasterAgentFactory', 'AgentRouter')
+ CLASS/FUNC AgentRouter
+  names: ('__name__', '__module__', '__qualname__', '_registered_agents', 'dict', 'str', 'type', '__annotations__', 'classmethod', 'register_agent', 'route', 'load_agent', 'execute')
+  varnames: ()
+   method register_agent args ('cls', 'key', 'agent_class')
+   method route args ('self', 'identity', 'key_candidates', 'key', 'registered')
+   method load_agent args ('self', 'identity', 'context', 'db')
+   method execute args ('self', 'identity', 'context', 'input_data', 'db')
+==== app\ai_runtime\orchestrator\__pycache__\event_bus.cpython-312.pyc
+DOC: 'In-memory event bus.'
+IMPORTS/NAMES: ('__doc__', 'collections', 'defaultdict', 'typing', 'Callable', 'app.ai_runtime.foundation.schemas', 'Event', 'EventBus')
+ CLASS/FUNC EventBus
+  names: ('__name__', '__module__', '__qualname__', 'defaultdict', 'list', '_subscribers', 'dict', 'str', 'Callable', 'Event', '__annotations__', '_initialized', 'classmethod', 'initialize', 'subscribe', 'publish')
+  varnames: ()
+   method initialize args ('cls',)
+   method subscribe args ('cls', 'event_type', 'handler')
+   method publish args ('cls', 'event', 'handler')
+==== app\ai_runtime\orchestrator\__pycache__\execution_engine.cpython-312.pyc
+DOC: 'Core execution pipeline for agents and workflows.'
+IMPORTS/NAMES: ('__doc__', 'time', 'datetime', 'sqlalchemy.orm', 'Session', 'app.ai_runtime.foundation.audit', 'AuditService', 'app.ai_runtime.foundation.schemas', 'AgentResult', 'ExecutionContext', 'WorkflowResult', 'app.ai_runtime.foundation.security', 'SecurityService', 'app.ai_runtime.orchestrator.agent_router', 'AgentRouter', 'app.ai_runtime.orchestrator.event_bus', 'EventBus', 'app.ai_runtime.registry.agent_registry', 'AgentRegistry', 'app.ai_runtime.registry.workflow_registry', 'WorkflowRegistry', 'app.ai_runtime.utils.constants', 'EventType', 'app.ai_runtime.utils.exceptions', 'AIRuntimeError', 'app.ai_runtime.utils.helpers', 'generate_execution_id', 'ExecutionEngine', 'EventTypeFactory')
+ CLASS/FUNC ExecutionEngine
+  names: ('__name__', '__module__', '__qualname__', '__init__', 'Session', 'int', 'dict', 'str', 'AgentResult', 'execute_agent', 'WorkflowResult', 'execute_workflow', '_resolve_subworkflow_agent_id', 'ExecutionContext', '_persist_failed_history')
+  varnames: ()
+   method __init__ args ('self',)
+   method execute_agent args ('self', 'db', 'agent_id', 'input_data', 'user_id', 'org_id', 'parent_execution_id', 'workflow_id', 'started', 'execution_id', 'context', 'identity', 'result', 'exc')
+    str agent_id
+    str failed
+   method execute_workflow args ('self', 'db', 'workflow_id', 'input_data', 'user_id', 'org_id', 'started', 'execution_id', 'workflow', 'phases', 'phase', 'sub', 'subworkflows', 'db_execution', 'results')
+    str workflow_id
+    str subworkflow.started
+    str subworkflow.finished
+    str completed
+    str failed
+   method _resolve_subworkflow_agent_id args ('self', 'value', 'db', 'WorkflowAiAgent', 'agent')
+   method _persist_failed_history args ('self', 'db', 'result', 'workflow_id', 'context')
+ CLASS/FUNC EventTypeFactory
+  names: ('__name__', '__module__', '__qualname__', 'staticmethod', 'str', 'int', 'agent_loaded', 'AgentResult', 'agent_executed')
+  varnames: ()
+   method agent_loaded args ('execution_id', 'agent_id', 'Event')
+    str agent_id
+   method agent_executed args ('execution_id', 'result', 'Event')
+==== app\ai_runtime\orchestrator\__pycache__\task_dispatcher.cpython-312.pyc
+DOC: 'Dispatch subworkflow tasks.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.foundation.schemas', 'AgentResult', 'TaskDispatcher')
+ CLASS/FUNC TaskDispatcher
+  names: ('__name__', '__module__', '__qualname__', 'list', 'AgentResult', 'dict', 'collect_results')
+  varnames: ()
+   method collect_results args ('self', 'results', 'item')
+    str results
+==== app\ai_runtime\orchestrator\__pycache__\workflow_orchestrator.cpython-312.pyc
+DOC: 'Public orchestration entry point.'
+IMPORTS/NAMES: ('__doc__', 'sqlalchemy.orm', 'Session', 'app.ai_runtime.orchestrator.execution_engine', 'ExecutionEngine', 'WorkflowOrchestrator')
+ CLASS/FUNC WorkflowOrchestrator
+  names: ('__name__', '__module__', '__qualname__', '__init__', 'Session', 'int', 'dict', 'execute_agent', 'execute_workflow', 'list_executions', 'str', 'get_execution', 'list_events')
+  varnames: ()
+   method __init__ args ('self',)
+   method execute_agent args ('self', 'db', 'agent_id', 'input_data', 'user_id', 'org_id')
+   method execute_workflow args ('self', 'db', 'workflow_id', 'input_data', 'user_id', 'org_id')
+   method list_executions args ('self', 'db', 'limit')
+   method get_execution args ('self', 'db', 'execution_id')
+   method list_events args ('self', 'db', 'execution_id')
+==== app\ai_runtime\prompts\__pycache__\__init__.cpython-312.pyc
+DOC: 'Prompt package.'
+IMPORTS/NAMES: ('__doc__',)
+==== app\ai_runtime\prompts\__pycache__\base_prompts.cpython-312.pyc
+DOC: 'Default runtime prompt templates.'
+IMPORTS/NAMES: ('__doc__', 'SYSTEM_PROMPT_TEMPLATE', 'MASTER_AGENT_PROMPT', 'FUNCTIONAL_AGENT_PROMPT', 'TASK_AGENT_PROMPT')
+==== app\ai_runtime\registry\__pycache__\__init__.cpython-312.pyc
+DOC: 'Registry exports.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.registry.agent_registry', 'AgentRegistry', 'app.ai_runtime.registry.connector_registry', 'ConnectorRegistry', 'app.ai_runtime.registry.tool_registry', 'ToolRegistry', 'app.ai_runtime.registry.workflow_registry', 'WorkflowRegistry', '__all__')
+==== app\ai_runtime\registry\__pycache__\agent_registry.cpython-312.pyc
+DOC: 'Agent registry for resolving configured agents.'
+IMPORTS/NAMES: ('__doc__', 'sqlalchemy.orm', 'Session', 'app.ai_runtime.foundation.generic_agent', 'GenericAgent', 'app.ai_runtime.foundation.identity', 'IdentityService', 'AgentRegistry')
+ CLASS/FUNC AgentRegistry
+  names: ('__name__', '__module__', '__qualname__', '_initialized', 'classmethod', 'initialize', '__init__', 'Session', 'int', 'get_agent_identity', 'get_agent_class')
+  varnames: ()
+   method initialize args ('cls',)
+   method __init__ args ('self',)
+   method get_agent_identity args ('self', 'db', 'agent_id')
+   method get_agent_class args ('self', 'identity')
+==== app\ai_runtime\registry\__pycache__\connector_registry.cpython-312.pyc
+DOC: 'Runtime connector registry.'
+IMPORTS/NAMES: ('__doc__', 'importlib', 'app.ai_runtime.utils.exceptions', 'ConnectorNotFoundError', 'ConnectorRegistry')
+ CLASS/FUNC ConnectorRegistry
+  names: ('__name__', '__module__', '__qualname__', '_initialized', '_connectors', 'dict', 'str', '__annotations__', 'classmethod', 'initialize', 'register_connector', 'list', 'list_connectors', 'load_connector')
+  varnames: ()
+   method initialize args ('cls',)
+   method register_connector args ('cls', 'name', 'class_path')
+   method list_connectors args ('self', 'name', 'path')
+   method load_connector args ('self', 'name', 'key', 'class_path', 'module_path', 'class_name', 'module')
+    str Connector 
+    str  not found
+    str CONNECTOR_NOT_FOUND
+==== app\ai_runtime\registry\__pycache__\tool_registry.cpython-312.pyc
+DOC: 'Runtime tool registry.'
+IMPORTS/NAMES: ('__doc__', 'importlib', 'app.ai_runtime.utils.exceptions', 'ToolNotFoundError', 'ToolRegistry')
+ CLASS/FUNC ToolRegistry
+  names: ('__name__', '__module__', '__qualname__', '_initialized', '_tools', 'dict', 'str', '__annotations__', 'classmethod', 'initialize', 'register_tool', 'list', 'list_tools', 'load_tool', 'execute_tool')
+  varnames: ()
+   method initialize args ('cls',)
+   method register_tool args ('cls', 'name', 'class_path')
+   method list_tools args ('self', 'name', 'path')
+   method load_tool args ('self', 'name', 'key', 'class_path', 'module_path', 'class_name', 'module')
+    str  not found
+    str TOOL_NOT_FOUND
+   method execute_tool args ('self', 'name', 'input_data')
+==== app\ai_runtime\registry\__pycache__\workflow_registry.cpython-312.pyc
+DOC: 'Workflow registry backed by existing workflow tables.'
+IMPORTS/NAMES: ('__doc__', 'sqlalchemy.orm', 'Session', 'selectinload', 'app.ai_runtime.utils.exceptions', 'WorkflowNotFoundError', 'app.modules.automation.models', 'Workflow', 'WorkflowPhase', 'WorkflowRegistry')
+ CLASS/FUNC WorkflowRegistry
+  names: ('__name__', '__module__', '__qualname__', '_initialized', 'classmethod', 'initialize', 'Session', 'int', 'Workflow', 'get_workflow')
+  varnames: ()
+   method initialize args ('cls',)
+   method get_workflow args ('self', 'db', 'workflow_id', 'workflow')
+    str Workflow 
+    str  not found
+    str WORKFLOW_NOT_FOUND
+==== app\ai_runtime\tools\__pycache__\__init__.cpython-312.pyc
+DOC: 'Runtime tool implementations.'
+IMPORTS/NAMES: ('__doc__',)
+==== app\ai_runtime\tools\__pycache__\email_tool.cpython-312.pyc
+DOC: 'Email notification tool placeholder.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.foundation.base_tool', 'BaseTool', 'app.ai_runtime.foundation.schemas', 'ToolResult', 'EmailTool')
+ CLASS/FUNC EmailTool
+  names: ('__name__', '__module__', '__qualname__', 'name', 'dict', 'ToolResult', 'execute')
+  varnames: ()
+   method execute args ('self', 'input_data', 'recipient')
+    str recipient
+    str notification
+==== app\ai_runtime\tools\__pycache__\ocr_tool.cpython-312.pyc
+DOC: 'OCR tool placeholder with deterministic behavior.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.foundation.base_tool', 'BaseTool', 'app.ai_runtime.foundation.schemas', 'ToolResult', 'OCRTool')
+ CLASS/FUNC OCRTool
+  names: ('__name__', '__module__', '__qualname__', 'name', 'dict', 'ToolResult', 'execute')
+  varnames: ()
+   method execute args ('self', 'input_data', 'text')
+    str document_text
+    str message
+    str ocr_text
+==== app\ai_runtime\tools\__pycache__\pdf_tool.cpython-312.pyc
+DOC: 'PDF tool placeholder.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.foundation.base_tool', 'BaseTool', 'app.ai_runtime.foundation.schemas', 'ToolResult', 'PDFTool')
+ CLASS/FUNC PDFTool
+  names: ('__name__', '__module__', '__qualname__', 'name', 'dict', 'ToolResult', 'execute')
+  varnames: ()
+   method execute args ('self', 'input_data')
+    str processed
+    str file_path
+==== app\ai_runtime\tools\__pycache__\upload_tool.cpython-312.pyc
+DOC: 'Upload tool placeholder.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.foundation.base_tool', 'BaseTool', 'app.ai_runtime.foundation.schemas', 'ToolResult', 'UploadTool')
+ CLASS/FUNC UploadTool
+  names: ('__name__', '__module__', '__qualname__', 'name', 'dict', 'ToolResult', 'execute')
+  varnames: ()
+   method execute args ('self', 'input_data', 'target')
+    str target
+    str runtime-storage
+    str upload
+    str stored
+==== app\ai_runtime\tools\__pycache__\validation_tool.cpython-312.pyc
+DOC: 'Document validation tool.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.foundation.base_tool', 'BaseTool', 'app.ai_runtime.foundation.schemas', 'ToolResult', 'ValidationTool')
+ CLASS/FUNC ValidationTool
+  names: ('__name__', '__module__', '__qualname__', 'name', 'dict', 'ToolResult', 'execute')
+  varnames: ()
+   method execute args ('self', 'input_data')
+    str ocr_text
+    str document_text
+    str file_path
+    str failed
+    str No document content or file path provided.
+==== app\ai_runtime\utils\__pycache__\__init__.cpython-312.pyc
+DOC: 'Shared AI Runtime utilities.'
+IMPORTS/NAMES: ('__doc__', 'app.ai_runtime.utils.config', 'AIRuntimeConfig', 'app.ai_runtime.utils.exceptions', 'AIRuntimeError', '__all__')
+==== app\ai_runtime\utils\__pycache__\config.cpython-312.pyc
+DOC: 'Environment-driven AI Runtime configuration.'
+IMPORTS/NAMES: ('__doc__', '__future__', 'annotations', 'os', 'AIRuntimeConfig')
+ CLASS/FUNC AIRuntimeConfig
+  names: ('__name__', '__module__', '__qualname__', 'os', 'getenv', 'DEFAULT_LLM_PROVIDER', 'DEFAULT_MODEL', 'float', 'DEFAULT_TEMPERATURE', 'int', 'DEFAULT_MAX_TOKENS', 'MAX_RETRY_ATTEMPTS', 'EXECUTION_TIMEOUT_SECONDS', 'MEMORY_TTL_SECONDS', 'CACHE_TTL_SECONDS', 'OPENAI_API_KEY', 'GEMINI_API_KEY', 'ANTHROPIC_API_KEY', 'GROQ_API_KEY', 'OLLAMA_BASE_URL', 'LOG_LEVEL', 'lower', 'ENABLE_AUDIT_LOG')
+  varnames: ()
+==== app\ai_runtime\utils\__pycache__\constants.cpython-312.pyc
+DOC: 'Constants used by the AI Runtime.'
+IMPORTS/NAMES: ('__doc__', 'AgentStatus', 'ExecutionStatus', 'EventType', 'LLMProvider')
+ CLASS/FUNC AgentStatus
+  names: ('__name__', '__module__', '__qualname__', 'ACTIVE', 'INACTIVE', 'DRAFT')
+  varnames: ()
+ CLASS/FUNC ExecutionStatus
+  names: ('__name__', '__module__', '__qualname__', 'PENDING', 'RUNNING', 'COMPLETED', 'FAILED', 'CANCELLED')
+  varnames: ()
+ CLASS/FUNC EventType
+  names: ('__name__', '__module__', '__qualname__', 'WORKFLOW_STARTED', 'WORKFLOW_COMPLETED', 'WORKFLOW_FAILED', 'AGENT_LOADED', 'AGENT_EXECUTED', 'AGENT_FAILED')
+  varnames: ()
+ CLASS/FUNC LLMProvider
+  names: ('__name__', '__module__', '__qualname__', 'OPENAI', 'GEMINI', 'ANTHROPIC', 'GROQ', 'OLLAMA', 'STUB')
+  varnames: ()
+==== app\ai_runtime\utils\__pycache__\enums.cpython-312.pyc
+DOC: 'Enum variants for runtime values.'
+IMPORTS/NAMES: ('__doc__', 'enum', 'Enum', 'str', 'ExecutionStatusEnum', 'MemoryTypeEnum')
+ CLASS/FUNC ExecutionStatusEnum
+  names: ('__name__', '__module__', '__qualname__', 'PENDING', 'RUNNING', 'COMPLETED', 'FAILED', 'CANCELLED')
+  varnames: ()
+ CLASS/FUNC MemoryTypeEnum
+  names: ('__name__', '__module__', '__qualname__', 'SESSION', 'SHORT_TERM', 'LONG_TERM')
+  varnames: ()
+==== app\ai_runtime\utils\__pycache__\exceptions.cpython-312.pyc
+DOC: 'AI Runtime exception hierarchy.'
+IMPORTS/NAMES: ('__doc__', 'Exception', 'AIRuntimeError', 'AgentNotFoundError', 'AgentExecutionError', 'AgentConfigurationError', 'WorkflowNotFoundError', 'WorkflowExecutionError', 'ToolNotFoundError', 'ToolExecutionError', 'ConnectorNotFoundError', 'ConnectorExecutionError', 'LLMProviderError', 'PromptRenderError', 'MemoryRuntimeError', 'SecurityRuntimeError', 'RegistryError')
+ CLASS/FUNC AIRuntimeError
+  names: ('__name__', '__module__', '__qualname__', '__doc__', 'str', 'dict', '__init__', 'to_dict', '__classcell__')
+  varnames: ()
+   method __init__ args ('self', 'message', 'code', 'details')
+   method to_dict args ('self',)
+ CLASS/FUNC AgentNotFoundError
+  names: ('__name__', '__module__', '__qualname__')
+  varnames: ()
+ CLASS/FUNC AgentExecutionError
+  names: ('__name__', '__module__', '__qualname__')
+  varnames: ()
+ CLASS/FUNC AgentConfigurationError
+  names: ('__name__', '__module__', '__qualname__')
+  varnames: ()
+ CLASS/FUNC WorkflowNotFoundError
+  names: ('__name__', '__module__', '__qualname__')
+  varnames: ()
+ CLASS/FUNC WorkflowExecutionError
+  names: ('__name__', '__module__', '__qualname__')
+  varnames: ()
+ CLASS/FUNC ToolNotFoundError
+  names: ('__name__', '__module__', '__qualname__')
+  varnames: ()
+ CLASS/FUNC ToolExecutionError
+  names: ('__name__', '__module__', '__qualname__')
+  varnames: ()
+ CLASS/FUNC ConnectorNotFoundError
+  names: ('__name__', '__module__', '__qualname__')
+  varnames: ()
+ CLASS/FUNC ConnectorExecutionError
+  names: ('__name__', '__module__', '__qualname__')
+  varnames: ()
+ CLASS/FUNC LLMProviderError
+  names: ('__name__', '__module__', '__qualname__')
+  varnames: ()
+ CLASS/FUNC PromptRenderError
+  names: ('__name__', '__module__', '__qualname__')
+  varnames: ()
+ CLASS/FUNC MemoryRuntimeError
+  names: ('__name__', '__module__', '__qualname__')
+  varnames: ()
+ CLASS/FUNC SecurityRuntimeError
+  names: ('__name__', '__module__', '__qualname__')
+  varnames: ()
+ CLASS/FUNC RegistryError
+  names: ('__name__', '__module__', '__qualname__')
+  varnames: ()
+==== app\ai_runtime\utils\__pycache__\helpers.cpython-312.pyc
+DOC: 'Small helper functions for runtime code.'
+IMPORTS/NAMES: ('__doc__', '__future__', 'annotations', 'json', 'time', 'uuid', 'datetime', 'timezone', 'functools', 'wraps', 'typing', 'Any', 'Callable', 'generate_execution_id', 'safe_json_loads', 'safe_json_dumps', 'truncate_text', 'get_timestamp', 'validate_required_fields', 'measure_time')
+ CLASS/FUNC generate_execution_id
+  names: ('uuid', 'uuid4', 'hex')
+  varnames: ()
+ CLASS/FUNC safe_json_loads
+  names: ('json', 'loads', 'TypeError', 'JSONDecodeError')
+  varnames: ('text', 'default')
+ CLASS/FUNC safe_json_dumps
+  names: ('json', 'dumps', 'str', 'TypeError')
+  varnames: ('obj',)
+ CLASS/FUNC truncate_text
+  names: ('len',)
+  varnames: ('text', 'max_length', 'value')
+ CLASS/FUNC get_timestamp
+  names: ('datetime', 'now', 'timezone', 'utc')
+  varnames: ()
+ CLASS/FUNC validate_required_fields
+  names: ('get',)
+  varnames: ('data', 'required', 'field')
+ CLASS/FUNC measure_time
+  names: ('wraps',)
+  varnames: ('func', 'wrapper')
+   method wrapper args ('args', 'kwargs', 'started', 'result')
+    str execution_time_ms
