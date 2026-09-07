@@ -1,11 +1,15 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
+# pypdf --> pdf data is converst in text by llm 
 
 data = PyPDFLoader("document loaders/GRU.pdf")
 
-docs = data.load()
+print(docs[14]) # pages no is 14 contails shoube there 
+print(len(docs)) # length will be created of document 
 
+docs = data.load()
+# 
 splitter = RecursiveCharacterTextSplitter(
     chunk_size = 1000,
     chunk_overlap=10
