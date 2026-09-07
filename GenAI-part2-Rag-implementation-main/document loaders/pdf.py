@@ -1,6 +1,8 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
+# document loader with llm 
+
 # pypdf --> pdf data is converst in text by llm 
 
 # context window --> fix size of data (The amount of the tax is known as the context window. )
