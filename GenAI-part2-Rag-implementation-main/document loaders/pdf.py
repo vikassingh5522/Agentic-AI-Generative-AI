@@ -3,6 +3,8 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 # pypdf --> pdf data is converst in text by llm 
 
+# context window --> fix size of data (The amount of the tax is known as the context window. )
+
 data = PyPDFLoader("document loaders/GRU.pdf")
 
 print(docs[14]) # pages no is 14 contails shoube there 
