@@ -17,7 +17,7 @@ embedding_model = OpenAIEmbeddings()
 vectorstore = Chroma.from_documents(
     documents = docs,
     embedding= embedding_model,
-    persist_directory= "chroma-db"
+    persist_directory= "chroma-db"  #shnw  algo this is use 
 )
 
 result = vectorstore.similarity_search("what is used for data analysis?",k=2)
