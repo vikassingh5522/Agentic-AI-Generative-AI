@@ -15,7 +15,7 @@ print(len(docs)) # length will be created of document
 docs = data.load()
 # 
 splitter = RecursiveCharacterTextSplitter(
-    chunk_size = 1000,
+    chunk_size = 1000, # this is size of chunk 
     chunk_overlap=10
 )
 
