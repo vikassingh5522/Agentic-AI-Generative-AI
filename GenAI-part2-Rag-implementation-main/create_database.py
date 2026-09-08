@@ -18,6 +18,7 @@ load_dotenv()
 data = PyPDFLoader("document loaders/deeplearning.pdf")
 docs = data.load()
 
+# all the document are contevet in to small small chunk 
 splitter = RecursiveCharacterTextSplitter(
     chunk_size = 1000,
     chunk_overlap = 200

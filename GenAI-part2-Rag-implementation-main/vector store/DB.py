@@ -20,13 +20,13 @@ vectorstore = Chroma.from_documents(
     persist_directory= "chroma-db"  #shnw  algo this is use 
 )
 
-result = vectorstore.similarity_search("what is used for data analysis?",k=2)
+result = vectorstore.similarity_search("what is used for data analysis?",k=2)  # similarity_search 
 
 for r in result:
     print(r.page_content)
     print(r.metadata)
 
-retriver = vectorstore.as_retriever()
+retriver = vectorstore.as_retriever()  # retrever the data  
 
 docs = retriver.invoke("Explain deep learning")
 
