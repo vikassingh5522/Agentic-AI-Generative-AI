@@ -47,7 +47,7 @@ chain = RunnableParallel({
 
 
 # ['short']) |short_prompt | model |   --> short proment 
-# ['detailed']) |detailed_prompt |model |parser  --> details proment 
+# ['detailed']) |detailed_prompt |model |parser  --> details proment  
 
 
 
