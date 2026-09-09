@@ -21,6 +21,8 @@
 
 # Runnable Sequence executes components sequentially, step by step
 
+# Sequence   ->    One → One → One
+
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -43,6 +45,7 @@ parser = StrOutputParser()
 
 
 chain = prompt | model | parser
+
 
 result = chain.invoke("Machine Learning")
 print(result)
