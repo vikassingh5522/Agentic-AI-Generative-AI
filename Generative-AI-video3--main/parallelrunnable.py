@@ -1,64 +1,161 @@
-# 21  Runnable Parallel 
 
-# Parallel = multiple Runnables run at the same time. 
-
-# For example, you want to get two different pieces of information from the same input:
-            
-# chain = RunnableParallel(
-#     summary=summary_chain,
-#     translation=translation_chain
-# )
-
-# Both chains can process the input independently.
-
-# Easy definition:
-# Runnable Parallel executes multiple Runnables simultaneously and combines their results
-
+# ---------------------------------------------------------
+# Runnable Parallel
+# ---------------------------------------------------------
+# RunnableParallel = run multiple chains/branches
+# at the same time and return all results together.
+#
+# Example:
+#
+# Input
+#   ├──→ Short explanation
+#   └──→ Detailed explanation
+#
+# Both branches work independently.
 
 
+# Load environment variables from .env
 from dotenv import load_dotenv
 load_dotenv()
 
-from langchain_mistralai import ChatMistralAI
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnableParallel,RunnableLambda
 
+# Import Mistral AI model
+from langchain_mistralai import ChatMistralAI
+
+# Used to create prompts
+from langchain_core.prompts import ChatPromptTemplate
+
+# Converts AI response into a normal Python string
+from langchain_core.output_parsers import StrOutputParser
+
+# RunnableParallel = multiple branches
+# RunnableLambda = our custom Python function as a Runnable
+from langchain_core.runnables import RunnableParallel, RunnableLambda
+
+
+# ---------------------------------------------------------
 # Components
+# ---------------------------------------------------------
+
+# Create the Mistral model
 model = ChatMistralAI(model="mistral-small-2506")
+
+# Create output parser
 parser = StrOutputParser()
 
-# Two different prompts
+
+# ---------------------------------------------------------
+# Prompt 1: Short explanation
+# ---------------------------------------------------------
+
 short_prompt = ChatPromptTemplate.from_template(
     "Explain {topic} in 1-2 lines"
 )
+
+# {topic} will be replaced by the topic we give.
+
+
+# ---------------------------------------------------------
+# Prompt 2: Detailed explanation
+# ---------------------------------------------------------
 
 detailed_prompt = ChatPromptTemplate.from_template(
     "Explain {topic} in detail"
 )
 
-# Input
-topic = "Machine Learning"
+# This prompt will ask the AI for a detailed explanation.
+
+# ---------------------------------------------------------
+# Runnable Parallel
+# ---------------------------------------------------------
 
 chain = RunnableParallel({
-    "short" :RunnableLambda(lambda x :x['short']) |short_prompt | model | parser ,
-    "detailed" :RunnableLambda(lambda x: x['detailed']) |detailed_prompt |model |parser
+
+    # =====================================================
+    # BRANCH 1 -> "short"
+    # =====================================================
+
+    "short":
+
+        # x is the complete input given to chain.invoke()
+        #
+        # Example x:
+        # {
+        #     "short": {"topic": "Machine Learning"},
+        #     "detailed": {"topic": "Deep Learning"}
+        # }
+        #
+        # x['short'] gives:
+        # {"topic": "Machine Learning"}
+        #
+        # So this Lambda selects ONLY the short input.
+        RunnableLambda(lambda x: x["short"])
+
+        # Now the selected input goes to short_prompt
+        # and fills {topic}.
+        |
+        short_prompt
+
+        # Send the prompt to Mistral AI
+        |
+        model
+
+        # Convert AIMessage into normal string
+        |
+        parser,
+
+
+    # =====================================================
+    # BRANCH 2 -> "detailed"
+    # =====================================================
+
+    "detailed":
+
+        # x['detailed'] gives:
+        # {"topic": "Deep Learning"}
+        #
+        # So this Lambda selects ONLY the detailed input.
+        RunnableLambda(lambda x: x["detailed"])
+
+        # Now the selected input goes to detailed_prompt
+        |
+        detailed_prompt
+
+        # Send prompt to Mistral AI
+        |
+        model
+
+        # Convert result into a string
+        |
+        parser
 })
 
 
-# ['short']) |short_prompt | model |   --> short proment 
-# ['detailed']) |detailed_prompt |model |parser  --> details proment  
+# ---------------------------------------------------------
+# Run the parallel chain
+# ---------------------------------------------------------
 
-
-
-# parallerunables 
 result = chain.invoke({
-    
-    #
-    
-    "short" : {"topic":"Machine Learning"},
-    "detailed" : {"topic":"Deep Learning"}
+
+    # Input for the "short" branch
+    "short": {
+        "topic": "Machine Learning"
+    },
+
+    # Input for the "detailed" branch
+    "detailed": {
+        "topic": "Deep Learning"
+    }
 })
 
-print(result['short'])
-print(result['detailed'])
+
+# ---------------------------------------------------------
+# Print results
+# ---------------------------------------------------------
+
+# Print output generated by short branch
+print(result["short"])
+
+# Print output generated by detailed branch
+print(result["detailed"])
+

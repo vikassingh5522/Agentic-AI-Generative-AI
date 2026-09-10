@@ -1,27 +1,29 @@
+"""
 
+1. Runnable Sequence
 
-# 1. Runnable Sequence
+Sequence = one after another
+The output of one Runnable becomes the input of the next.
 
-# Sequence = one after another
-# The output of one Runnable becomes the input of the next.
+Prompt
+  ↓
+LLM
+  ↓
+Output Parser
+  ↓
+Final Output
 
-# Prompt
-#   ↓
-# LLM
-#   ↓
-# Output Parser
-#   ↓
-# Final Output
+Example:
 
-# Example:
+chain = prompt | llm | parser
 
-# chain = prompt | llm | parser
+Easy definition:
 
-# Easy definition:
+Runnable Sequence executes components sequentially, step by step
 
-# Runnable Sequence executes components sequentially, step by step
+Sequence   ->    One → One → One
 
-# Sequence   ->    One → One → One
+"""
 
 
 from dotenv import load_dotenv
