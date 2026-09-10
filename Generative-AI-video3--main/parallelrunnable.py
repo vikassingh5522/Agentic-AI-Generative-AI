@@ -52,8 +52,10 @@ chain = RunnableParallel({
 
 
 # parallerunables 
-
 result = chain.invoke({
+    
+    #
+    
     "short" : {"topic":"Machine Learning"},
     "detailed" : {"topic":"Deep Learning"}
 })
